@@ -1,5 +1,7 @@
 package com.java.chatbotbe;
 
+import java.time.format.DateTimeFormatter;
+
 public final class Constants {
 
     public static final String SUCCESS_CODE = "0";
@@ -17,4 +19,9 @@ public final class Constants {
 
     public static final String AUTH_ERROR_DETAIL_MESSAGE = "Tên đăng nhập hoặc mật khẩu không đúng !";
     public static final String AUTH_ERROR_DENINED_MESSAGE = "Tài khoản không có quyền đăng nhập.Vui lòng sử dụng tài khoản khác !";
+
+    public static final String ROLE_USER = "USER";
+    public static final String ROLE_BOT = "BOT";
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 }

@@ -5,10 +5,7 @@ import com.java.chatbotbe.model.ChatbotDefautRespone;
 import com.java.chatbotbe.model.ConversationModel;
 import com.java.chatbotbe.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,19 +17,36 @@ public class ConversationController {
     private ConversationService conversationService;
 
     @GetMapping("")
-    public ChatbotDefautRespone<?> getConversationByUser (@RequestParam Long userId){
-        ChatbotDefautRespone<List<ConversationModel>> respone = new ChatbotDefautRespone<>();
+    public ChatbotDefautRespone<?> getConversation (){
+        ChatbotDefautRespone<List<ConversationModel>> response = new ChatbotDefautRespone<>();
         try{
-            List<ConversationModel> conversationModelList = conversationService.getConversationByUser(userId);
-            respone.setError(Constants.SUCCESS_CODE);
-            respone.setMessage(Constants.SUCCESS_MESSAGE);
-            respone.setDetailMessage(Constants.SUCCESS_MESSAGE);
-            respone.setOutput(conversationModelList);
+            List<ConversationModel> conversationModelList = conversationService.getConversation();
+            response.setError(Constants.SUCCESS_CODE);
+            response.setMessage(Constants.SUCCESS_MESSAGE);
+            response.setDetailMessage(Constants.SUCCESS_MESSAGE);
+            response.setOutput(conversationModelList);
         }catch (Exception e){
-            respone.setError(Constants.SERVER_ERROR_CODE);
-            respone.setMessage(Constants.SERVER_ERROR_MESSAGE);
-            respone.setDetailMessage(e.getMessage());
+            response.setError(Constants.SERVER_ERROR_CODE);
+            response.setMessage(Constants.SERVER_ERROR_MESSAGE);
+            response.setDetailMessage(e.getMessage());
         }
-        return respone;
+        return response;
+    }
+
+    @PostMapping("/add")
+    public ChatbotDefautRespone<?> addConversation (@RequestBody ConversationModel conversationModel){
+        ChatbotDefautRespone<ConversationModel> response = new ChatbotDefautRespone<>();
+        try{
+            ConversationModel conversation = conversationService.save(conversationModel);
+            response.setError(Constants.SUCCESS_CODE);
+            response.setMessage(Constants.SUCCESS_MESSAGE);
+            response.setDetailMessage(Constants.SUCCESS_MESSAGE);
+            response.setOutput(conversation);
+        }catch (Exception e){
+            response.setError(Constants.SERVER_ERROR_CODE);
+            response.setMessage(Constants.SERVER_ERROR_MESSAGE);
+            response.setDetailMessage(e.getMessage());
+        }
+        return response;
     }
 }

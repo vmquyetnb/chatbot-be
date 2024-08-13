@@ -12,4 +12,5 @@ import java.time.LocalDateTime;
 public class ConversationModel {
     private String title;
     private LocalDateTime createdDate;
+
 }

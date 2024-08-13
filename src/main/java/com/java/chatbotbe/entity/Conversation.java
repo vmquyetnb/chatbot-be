@@ -1,13 +1,12 @@
 package com.java.chatbotbe.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.persistence.*;
+import java.time.LocalDateTime;;
 
 @Entity
 @Data
@@ -28,6 +27,7 @@ public class Conversation {
     private LocalDateTime createdDate;
 
 
-    @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
-    private List<Message> message;
+//    @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
+//    private List<Message> message;
+
 }
