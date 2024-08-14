@@ -1,5 +1,9 @@
 package com.java.chatbotbe.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.java.chatbotbe.util.LocalDateTimeDeserializer;
+import com.java.chatbotbe.util.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +28,8 @@ public class Conversation {
 
     @CreatedDate
     @Column(updatable = false, name = "created_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdDate;
 
 

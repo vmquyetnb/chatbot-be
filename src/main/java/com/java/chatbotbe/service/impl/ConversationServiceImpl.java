@@ -23,6 +23,7 @@ public class ConversationServiceImpl implements ConversationService {
         List<Conversation> conversations = conversationRepo.findAll();
         for(Conversation conversation : conversations){
             ConversationModel conversationModel = new ConversationModel();
+            conversationModel.setId(conversation.getId());
             conversationModel.setTitle(conversation.getTitle());
             conversationModel.setCreatedDate(conversation.getCreatedDate());
             result.add(conversationModel);
@@ -37,6 +38,7 @@ public class ConversationServiceImpl implements ConversationService {
         conversation.setCreatedDate(LocalDateTime.now());
         conversationRepo.save(conversation);
 
+        conversationModel.setId(conversation.getId());
         conversationModel.setTitle(conversation.getTitle());
         conversationModel.setCreatedDate(conversation.getCreatedDate());
         return conversationModel;
